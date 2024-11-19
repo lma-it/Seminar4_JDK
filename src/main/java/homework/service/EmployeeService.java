@@ -5,8 +5,7 @@ import homework.interfaces.Decorator;
 import homework.utlis.EmployeeBD;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Getter
 public class EmployeeService implements Decorator {
@@ -33,44 +32,22 @@ public class EmployeeService implements Decorator {
     }
 
     public List<Employee> findEmployeeByStage(int stage){
-        List<Employee> stageEqual = new ArrayList<>();
-
-        for(Employee employee : getEmployees()){
-            if(employee.getStage() == stage){
-                stageEqual.add(employee);
-            }
-        }
-        return !stageEqual.isEmpty() ? stageEqual : null;
+        return getEmployees().stream().filter(employee -> employee.getStage() == stage).toList();
     }
 
     public List<Employee> findPhoneNumberByName(String name){
-        List<Employee> phoneHolders = new ArrayList<>();
-
-        for(Employee employee : getEmployees()){
-            if(employee.getName().equals(name)){
-                phoneHolders.add(employee);
-            }
-        }
-        return !phoneHolders.isEmpty() ? phoneHolders : null;
+        return getEmployees().stream().filter(employee -> employee.getName().equals(name)).toList();
     }
 
     public Employee findEmployeeByID(int id){
-
-        for(Employee employee : getEmployees()){
-            if(employee.getID() == id){
-                return employee;
-            }
-        }
-        return null;
+        return getEmployees().stream().filter(employee -> employee.getID() == id).findFirst().orElse(null);
     }
 
     @Override
     public void decorateOutput(List<Employee> employeeList) {
 
         if(!employeeList.isEmpty()){
-            for (Employee employee : employeeList){
-                System.out.println(employee.toString());
-            }
+            employeeList.forEach(employee -> System.out.println(employee.toString()));
         } else {
             System.out.println("Сотрудники не найдены.");
         }
