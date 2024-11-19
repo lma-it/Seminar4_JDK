@@ -55,7 +55,11 @@ public class EmployeeService implements Decorator {
 
     @Override
     public void decorateOutput(Employee employee) {
-        System.out.println(employee.toString());
+        if(employee != null){
+            System.out.println(employee.toString());
+        } else {
+            System.out.println("Сотрудника с таким ID не существует.");
+        }
     }
 
 }
