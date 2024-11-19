@@ -6,6 +6,7 @@ import homework.utlis.EmployeeBD;
 import lombok.Getter;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Getter
 public class EmployeeService implements Decorator {
@@ -46,11 +47,9 @@ public class EmployeeService implements Decorator {
     @Override
     public void decorateOutput(List<Employee> employeeList) {
 
-        if(!employeeList.isEmpty()){
-            employeeList.forEach(employee -> System.out.println(employee.toString()));
-        } else {
-            System.out.println("Сотрудники не найдены.");
-        }
+        String print = !employeeList.isEmpty() ? employeeList.stream().map(Employee::toString).collect(Collectors.joining("\n")) : "Сотрудники не найдены.";
+        System.out.println(print);
+
     }
 
     @Override
