@@ -64,10 +64,9 @@ public class View {
                             company.decorateOutput(company.findPhoneNumberByName(name));
                         }
                         case 3 -> {
-                            // найти сотр по табельному номеру.
                             System.out.println("Все табельные номера сотрудников компании:");
                             for (Employee employee : company.getEmployees()){
-                                System.out.println(employee.getName());
+                                System.out.println(employee.getID());
                             }
                             int id = Integer.parseInt(InputService.input("Введите табельный номер, чтоб просмотреть информацию о сотруднике"));
                             company.decorateOutput(company.findEmployeeByID(id));
